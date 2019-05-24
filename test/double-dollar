@@ -1,0 +1,3 @@
+#!/usr/bin/env tbdscript
+echo use double-dollar $$ to print a $$
+echo you also need double-dollar ($$) inside quotes "$$"

@@ -1,0 +1,4 @@
+#!/usr/bin/env tbdscript
+echo "testing a hashtag # inside a quote"
+echo "escaping quote with "" "
+echo one quote: """"

@@ -1,0 +1,2 @@
+#!/usr/bin/env tbdscript
+echo sys.argv is: $sys.argv

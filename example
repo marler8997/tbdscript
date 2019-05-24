@@ -1,0 +1,107 @@
+#!/usr/bin/env tbdscript
+
+################################################################################
+# echo
+################################################################################
+echo Hello
+
+################################################################################
+# setting and using variables
+################################################################################
+set a foo
+set b bar
+set c "$a$b"
+assert [ $c == "foobar" ]
+
+set c "$a and $b"
+# bash '[' progam does not support spaces in arguments
+#assert [ $c == "foo and bar" ]
+
+################################################################################
+# sys vars
+################################################################################
+echo "sys.file    : '$sys.file'"
+echo "sys.abs_file: '$sys.abs_file'"
+echo "sys.abs_dir : '$sys.abs_dir'"
+
+################################################################################
+# importing other files
+################################################################################
+#source $sys.abs_dir/test/set_message.tbdscript
+#echo "MESSAGE is '$MESSAGE'"
+# import $sys.abs_dir/test/set_message.tbdscript
+# echo "MESSAGE is $set_message.MESSAGE"
+
+################################################################################
+# redirection
+################################################################################
+echo "hello" > testfile
+echo "hello" 2> testfile
+echo "hello" &> testfile
+echo "hello" >> testfile
+echo "hello" 2>> testfile
+echo "hello" &>> testfile
+rm testfile
+
+################################################################################
+# if/elif/else
+################################################################################
+if true
+    echo "true is true"
+else
+    echo "Error: true is not true"
+    assert
+fi
+
+if false
+    echo "Error: false is true"
+    assert
+else
+    echo "false is false"
+fi
+
+if false
+    echo "Error: false is true"
+    assert
+elif false
+    echo "Error: false is true"
+    assert
+elif true
+    echo "true is still true"
+else
+    echo "Error: true is not true"
+    assert
+fi
+    
+if true
+    if false
+        echo "Error: false is true"
+        assert
+    else
+        echo "A nested if-else"
+    fi
+fi
+
+################################################################################
+# Optional variables
+################################################################################
+if [ "$opt.FOO" == "" ]
+    echo FOO is not set
+else
+    echo here
+    echo FOO is set to '$FOO'
+fi
+ls -l
+
+################################################################################
+# Line Continuation
+################################################################################
+echo This is an\
+ example of line\
+ continuation
+
+
+################################################################################
+# process substitution?
+################################################################################
+#set a $(what)
